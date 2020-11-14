@@ -1,3 +1,5 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -10,11 +12,13 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CoreModule,
-    FormsModule,
+    SimpleNotificationsModule.forRoot(),
+    BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

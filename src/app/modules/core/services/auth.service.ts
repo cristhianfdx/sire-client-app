@@ -11,7 +11,7 @@ const baseUrl = environment.apiUrl;
 @Injectable({
   providedIn: 'root',
 })
-export class AuthServiceService {
+export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(request: LoginRequest): Observable<TokenResponse> {

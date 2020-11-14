@@ -3,38 +3,55 @@
   class="flex container mx-auto items-center justify-center"
 >
   <div class="w-full max-w-md">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      [formGroup]="form"
+      (ngSubmit)="login()"
+    >
       <img class="logo rounded" src="assets/images/logo.png" alt="Logo App" />
       <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="username"
-        >
-          N&uacute;mero de documento
-        </label>
+        <label class="label" for="username"> N&uacute;mero de documento </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           placeholder="Número de documento"
+          formControlName="documentNumber"
         />
+        <div
+          *ngIf="checkErrors('documentNumber')"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
+        >
+          <div *ngIf="form.controls['documentNumber'].errors.required">
+            El número de documento es requerido
+          </div>
+        </div>
       </div>
       <div class="mb-6">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="password"
-        >
-          Contraseña
-        </label>
+        <label class="label" for="password"> Contraseña </label>
         <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="password"
           placeholder="Contraseña"
+          formControlName="password"
         />
+        <div
+          *ngIf="checkErrors('password')"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
+        >
+          <div *ngIf="form.controls['password'].errors.required">
+            La contraseña es requerida
+          </div>
+        </div>
       </div>
       <div class="grid">
         <button
-          class="bg-primary hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="button"
+          [class]="
+            !form.invalid
+              ? 'mt-3 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              : 'mt-3 bg-teal-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed'
+          "
+          type="submit"
+          [disabled]="form.invalid"
         >
           Iniciar sesi&oacute;n
         </button>
