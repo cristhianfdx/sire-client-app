@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './modules/shared/shared.module';
 import { CoreModule } from '@core/core.module';
 import { AppComponent } from './app.component';
+import { LayoutComponent } from './modules/layout/layout.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LayoutComponent],
   imports: [
     SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
@@ -19,6 +21,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     CoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],
