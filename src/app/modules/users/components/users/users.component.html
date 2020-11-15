@@ -74,11 +74,18 @@
               <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <button
                   class="bg-blue-400 hover:bg-blue-600 text-gray-100 font-bold py-2 px-3 rounded inline-flex items-center mr-2"
+                  (click)="openCreateUserModal(user)"
                 >
                   <fa-icon [icon]="faUserEdit"></fa-icon>
                 </button>
                 <button
                   class="bg-red-400 hover:bg-red-600 text-gray-100 font-bold py-2 px-3 rounded inline-flex items-center sm:mt-2"
+                  [swal]="{
+                    title: '¿Está segur@ de que quiere eliminar el usuario',
+                    icon: 'warning',
+                    showCancelButton: true
+                  }"
+                  (confirm)="deleteUser(user.id)"
                 >
                   <fa-icon [icon]="faTrash"></fa-icon>
                 </button>

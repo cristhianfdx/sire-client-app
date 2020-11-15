@@ -2,8 +2,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -18,6 +19,7 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent, LayoutComponent],
   imports: [
     SimpleNotificationsModule.forRoot(),
+    SweetAlert2Module.forRoot(),
     BrowserAnimationsModule,
     FontAwesomeModule,
     HttpClientModule,

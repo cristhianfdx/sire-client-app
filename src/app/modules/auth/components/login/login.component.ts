@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   constructor(
+    private notificationUtilService: NotificationUtilService,
+    private tokenService: TokenService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private tokenService: TokenService,
-    private notificationUtilService: NotificationUtilService,
     private router: Router
   ) {
     this.buildForm();
