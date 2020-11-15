@@ -43,9 +43,16 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(id: number): void {
-    this.userService.delete(id).subscribe(() => {
-      this.notificationUtilService.newOkMessage('Usuario eliminado');
-      this.getUsers();
-    });
+    this.userService.delete(id).subscribe(
+      () => {
+        this.notificationUtilService.newOkMessage('Usuario eliminado.');
+        this.getUsers();
+      },
+      (err) => {
+        this.notificationUtilService.newErrorMessage(`
+         El Usuario no puede ser eliminado. </br>
+         Se encontraron repuestos asociados.`);
+      }
+    );
   }
 }

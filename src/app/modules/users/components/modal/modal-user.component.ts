@@ -66,7 +66,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
   }
 
   buildEditForm(): void {
-    const { name, lastName, documentNumber, password, role } = this.user;
+    const { name, lastName, documentNumber, role } = this.user;
 
     this.modalForm = this.formBuilder.group(
       {
@@ -92,11 +92,9 @@ export class ModalUserComponent implements OnInit, OnDestroy {
         this.userService.create(request).subscribe(
           () => {
             this.activeModal.dismiss('Cross click');
-            this.notificationUtilService.newOkMessage('Usuario creado');
+            this.notificationUtilService.newOkMessage('Usuario creado.');
           },
-          (error) => {
-            this.notificationUtilService.newErrorMessage('error');
-          }
+          ({ status }) => this.throwErrorMessages(status)
         );
       }
     }
@@ -104,15 +102,32 @@ export class ModalUserComponent implements OnInit, OnDestroy {
 
   update(): void {
     const request: UpdateUserRequest = this.modalForm.value;
+
+    if (request.password === '') {
+      delete request.password;
+    }
+
     this.userService.update(this.user.id, request).subscribe(
       () => {
         this.activeModal.dismiss('Cross click');
-        this.notificationUtilService.newOkMessage('Usuario actualizado');
+        this.notificationUtilService.newOkMessage('Usuario actualizado.');
       },
-      (error) => {
-        this.notificationUtilService.newErrorMessage('error');
-      }
+      ({ status }) => this.throwErrorMessages(status)
     );
+  }
+
+  throwErrorMessages(status: number): void {
+    if (status === 400) {
+      this.notificationUtilService.newErrorMessage(
+        'Ya existe un usuario registrado con ese número de documento'
+      );
+    }
+
+    if (status === 500) {
+      this.notificationUtilService.newErrorMessage(
+        'Estamos presentando fallas, por favor intente más tarde'
+      );
+    }
   }
 
   checkErrors(control: string): boolean {
