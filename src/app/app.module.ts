@@ -2,6 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     CoreModule,
     SharedModule,
+    NgbModule,
   ],
   providers: [
     {

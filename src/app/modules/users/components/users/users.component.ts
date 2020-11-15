@@ -1,7 +1,9 @@
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { ModalUserComponent } from '../modal/modal-user.component';
+import { faUserEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '@core/services/user.service';
 
 @Component({
@@ -11,12 +13,16 @@ import { UserService } from '@core/services/user.service';
 })
 export class UsersComponent implements OnInit {
   users$: Observable<any>;
-  faEdit = faEdit;
+  faUserEdit = faUserEdit;
   faTrash = faTrash;
   faPlus = faPlus;
   users: [];
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private modalService: NgbModal,
+    public activeModal: NgbActiveModal
+  ) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -24,5 +30,9 @@ export class UsersComponent implements OnInit {
 
   getUsers(): void {
     this.users$ = this.userService.getUsers();
+  }
+
+  openCreateUserModal(): void {
+    this.modalService.open(ModalUserComponent, { size: 'lg' });
   }
 }
