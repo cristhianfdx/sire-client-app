@@ -1,59 +1,69 @@
-<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-4">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <svg
-      class="fill-current h-8 w-8 mr-2"
-      width="54"
-      height="54"
-      viewBox="0 0 54 54"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"
-      />
-    </svg>
-    <a routerLink="/home" class="font-semibold text-xl tracking-tight">SIRE</a>
-  </div>
-  <div class="block lg:hidden">
-    <button
-      class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
-    >
+<div
+  class="w-full text-white bg-teal-500 dark-mode:text-gray-200 dark-mode:bg-gray-800"
+>
+  <div
+    class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8"
+  >
+    <div class="p-4 flex flex-row items-center justify-between">
       <svg
-        class="fill-current h-3 w-3"
-        viewBox="0 0 20 20"
+        class="fill-current h-8 w-8 mr-2"
+        width="54"
+        height="54"
+        viewBox="0 0 54 54"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <title>Menu</title>
-        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        <path
+          d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"
+        />
       </svg>
-    </button>
-  </div>
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
       <a
         routerLink="/home"
-        routerLinkActive="active"
-        class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+        class="text-lg font-semibold tracking-widest text-white uppercase rounded-lg focus:outline-none focus:shadow-outline"
+        >SIRE</a
       >
-        Inicio
-      </a>
-      <a
-        routerLink="/users"
-        class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+      <button
+        class="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
+        (click)="toggleNavbar()"
       >
-        Gestión Usuarios
-      </a>
-      <a
-        routerLink="/parts"
-        class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-      >
-        Gestión de Repuestos
-      </a>
-      <a
-        routerLink="/stock"
-        class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-      >
-        Stock de Repuestos
-      </a>
+        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+          <path
+            fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
     </div>
+    <nav
+      [ngClass]="{ hidden: !showMenu, flex: showMenu }"
+      class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row"
+    >
+      <a
+        class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+        routerLink="/home"
+        >Inicio</a
+      >
+      <a
+        class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+        routerLink="/users"
+        >Gesti&oacute;n de usuarios</a
+      >
+      <a
+        class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+        routerLink="/parts"
+        >Gesti&oacute;n de repuestos</a
+      >
+      <a
+        class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+        routerLink="/stock"
+        >Stock de repuestos</a
+      >
+
+      <a
+        class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline cursor-pointer"
+        (click)="logout()"
+        >Cerrar sesi&oacute;n <fa-icon [icon]="faSignOutAlt" class="ml-1"></fa-icon
+      ></a>
+    </nav>
   </div>
-</nav>
+</div>

@@ -1,4 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,12 +17,13 @@ import { LayoutComponent } from './modules/layout/layout.component';
   imports: [
     SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
+    FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

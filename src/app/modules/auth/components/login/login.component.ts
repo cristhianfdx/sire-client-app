@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
+import { TokenResponse } from '@core/models/response/token.response';
+import { LoginRequest } from '@core/models/request/login.request';
 import { AuthService } from '@core/services/auth.service';
 import { TokenService } from '@core/services/token.service';
-import { LoginRequest } from '@core/models/request/login.request';
-import { TokenResponse } from '@core/models/response/token.response';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
-    private notificationUtilService: NotificationUtilService
+    private notificationUtilService: NotificationUtilService,
+    private router: Router
   ) {
     this.buildForm();
   }
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.subscription = this.authService.login(request).subscribe(
         ({ token }: TokenResponse) => {
           this.tokenService.saveToken(token);
+          this.router.navigate(['/home']);
         },
         (error) => {
           this.notificationUtilService.newErrorMessage(
