@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireStorageReference } from '@angular/fire/storage';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PartService } from '@core/services/part.service';
 import { Observable } from 'rxjs';
@@ -12,10 +13,10 @@ import {
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
 import { FirebaseStorageService } from '@core/services/firebase-storage.service';
-import { UpdatePartRequest } from '@core/models/request/update-part.request';
-import { Branch } from '@core/models/request/branch';
-import { AngularFireStorageReference } from '@angular/fire/storage';
 import { CreatePartRequest } from '@core/models/request/create-part.request';
+import { UpdatePartRequest } from '@core/models/request/update-part.request';
+import { BrandValidator } from '@core/validators/option-select.validator';
+import { Branch } from '@core/models/request/branch';
 
 @Component({
   selector: 'app-modal-part',
@@ -70,6 +71,8 @@ export class ModalPartComponent implements OnInit, OnDestroy {
       imageUrl: [null, [Validators.required]],
       description: [''],
       branch: ['Seleccione Marca', [Validators.required]],
+    }, {
+      validator: BrandValidator.IsValidBrand
     });
   }
 

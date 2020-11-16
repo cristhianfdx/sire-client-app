@@ -104,10 +104,16 @@
               </div>
             </div>
             <div
-              *ngIf="partForm.controls['branch'].value === 'Seleccione Marca'"
+              *ngIf="checkErrors('branch')"
               class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
             >
-              La marca es requerida
+              <div
+                *ngIf="
+                  partForm.controls['branch'].errors.IsValidBrand
+                "
+              >
+                La Marca es requerida
+              </div>
             </div>
           </div>
           <div class="m-auto flex justify-between">

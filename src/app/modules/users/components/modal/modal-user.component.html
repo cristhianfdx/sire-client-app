@@ -141,10 +141,16 @@
               </div>
             </div>
             <div
-              *ngIf="modalForm.controls['role'].value === 'Seleccione Rol'"
+              *ngIf="checkErrors('role')"
               class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
             >
-              El rol es requerido
+              <div
+                *ngIf="
+                  modalForm.controls['role'].errors.IsValidRole
+                "
+              >
+                El Rol es requerido
+              </div>
             </div>
           </div>
         </form>

@@ -6,12 +6,13 @@ import {
   faTimesCircle,
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { PasswordValidator } from './password.validator';
 import { Observable } from 'rxjs';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
 import { UpdateUserRequest } from '@core/models/request/update-user.request';
 import { CreateUserRequest } from '@core/models/request/create-user.request';
+import { RoleValidator } from '@core/validators/option-select.validator';
+import { PasswordValidator } from '@core/validators/password.validator';
 import { UserService } from '@core/services/user.service';
 import { Role } from '@core/models/response/role';
 
@@ -60,7 +61,10 @@ export class ModalUserComponent implements OnInit, OnDestroy {
         role: ['Seleccione Rol', [Validators.required]],
       },
       {
-        validator: PasswordValidator.MatchPassword,
+        validators: [
+          PasswordValidator.MatchPassword,
+          RoleValidator.IsValidRole,
+        ],
       }
     );
   }
