@@ -54,7 +54,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
       {
         name: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
-        documentNumber: ['', Validators.required],
+        documentNumber: ['', [Validators.required]],
         password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]],
         role: ['Seleccione Rol', [Validators.required]],
@@ -70,9 +70,9 @@ export class ModalUserComponent implements OnInit, OnDestroy {
 
     this.modalForm = this.formBuilder.group(
       {
-        name: [name, [Validators.required]],
-        lastName: [lastName, [Validators.required]],
-        documentNumber: [documentNumber, Validators.required],
+        name: [name],
+        lastName: [lastName],
+        documentNumber: [documentNumber],
         password: [''],
         confirmPassword: [''],
         role: [role.id, [Validators.required]],

@@ -1,1 +1,99 @@
-<p>parts works!</p>
+<div class="container mx-auto px-4 sm:px-8" *ngIf="parts$ | async as parts">
+  <div class="py-8">
+    <div>
+      <h2 class="text-2xl font-semibold leading-tight mb-8">Repuestos</h2>
+    </div>
+    <div *ngIf="parts.length === 0">
+      <p class="text-2xl leading-tight mt-8">No existen repuestos creados</p>
+    </div>
+    <button
+      class="bg-teal-500 hover:bg-teal-600 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center mt-4 mb-4"
+      (click)="openCreatePartModal()"
+    >
+      <span class="mr-3">Crear repuesto</span>
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+    <div
+      class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"
+      *ngIf="parts.length > 0"
+    >
+      <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+        <table class="min-w-full leading-normal">
+          <thead>
+            <tr>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+              >
+                Nombre
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+              >
+                Descripci&oacute;n
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+              >
+                Marca
+              </th>
+              <th
+                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+              >
+                Acciones
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let part of parts">
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 w-10 h-10">
+                    <img
+                      class="w-full h-full rounded-full"
+                      [src]="part.imageUrl"
+                      alt="Part Avatar"
+                    />
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ part.name }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <p class="text-gray-900 whitespace-no-wrap">
+                  {{ part.description }}
+                </p>
+              </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <p class="text-gray-900 whitespace-no-wrap">
+                  {{ part.branch.description }}
+                </p>
+              </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <button
+                  class="bg-blue-400 hover:bg-blue-600 text-gray-100 font-bold py-2 px-3 rounded inline-flex items-center mr-2"
+                  (click)="openCreatePartModal(part)"
+                >
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+                <button
+                  class="bg-red-400 hover:bg-red-600 text-gray-100 font-bold py-2 px-3 rounded inline-flex items-center sm:mt-2"
+                  [swal]="{
+                    title: '¿Está segur@ de que quiere eliminar el repuesto',
+                    icon: 'warning',
+                    showCancelButton: true
+                  }"
+                  (confirm)="deletePart(part.id)"
+                >
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

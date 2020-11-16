@@ -81,7 +81,10 @@
               formControlName="password"
             />
             <small *ngIf="user" class="text-gray-600">
-              <i>(Si no desea cambiar la contrase&ntilde;a puede dejar el campo vac&iacute;o)</i>
+              <i
+                >(Si no desea cambiar la contrase&ntilde;a puede dejar el campo
+                vac&iacute;o)</i
+              >
             </small>
             <div
               *ngIf="checkErrors('password')"
@@ -138,12 +141,10 @@
               </div>
             </div>
             <div
-              *ngIf="checkErrors('role')"
+              *ngIf="modalForm.controls['role'].value === 'Seleccione Rol'"
               class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
             >
-              <div *ngIf="modalForm.controls['role'].errors.required">
-                El rol es requerido
-              </div>
+              El rol es requerido
             </div>
           </div>
         </form>

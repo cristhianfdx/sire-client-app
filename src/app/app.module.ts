@@ -2,9 +2,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -15,19 +17,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from '@core/core.module';
 import { AppComponent } from './app.component';
 
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [AppComponent, LayoutComponent],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
     SimpleNotificationsModule.forRoot(),
-    SweetAlert2Module.forRoot(),
+    AngularFireStorageModule,
     BrowserAnimationsModule,
+    AngularFireAuthModule,
     FontAwesomeModule,
-    HttpClientModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserModule,
+    SharedModule,
     FormsModule,
     CoreModule,
-    SharedModule,
     NgbModule,
   ],
   providers: [
