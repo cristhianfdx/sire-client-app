@@ -6,7 +6,7 @@ import { GetPartResponse } from '@core/models/response/get-part.response';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { UpdatePartRequest } from '@core/models/request/update-part.request';
-import { Branch } from '@core/models/request/branch';
+import { Brand } from '@core/models/request/brand';
 
 const baseUrl = environment.apiUrl;
 
@@ -15,7 +15,7 @@ const baseUrl = environment.apiUrl;
 })
 export class PartService {
   pathUrl = '/parts';
-  pathBranchesUrl = '/branches';
+  pathBranchesUrl = '/brands';
 
   constructor(private http: HttpClient) {}
 
@@ -35,11 +35,11 @@ export class PartService {
     return this.http.delete<void>(`${baseUrl + this.pathUrl}/${id}`);
   }
 
-  createBranch(branch: Branch): Observable<void> {
-    return this.http.post<void>(baseUrl + this.pathBranchesUrl, branch);
+  createBrands(brand: Brand): Observable<void> {
+    return this.http.post<void>(baseUrl + this.pathBranchesUrl, brand);
   }
 
-  getBranches(): Observable<Branch[]> {
-    return this.http.get<Branch[]>(baseUrl + this.pathBranchesUrl);
+  getBrands(): Observable<Brand[]> {
+    return this.http.get<Brand[]>(baseUrl + this.pathBranchesUrl);
   }
 }

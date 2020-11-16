@@ -1,4 +1,4 @@
-import { Branch } from './branch';
+import { Brand } from './brand';
 import { Stock } from './stock';
 
 export interface UpdatePartRequest {
@@ -6,6 +6,6 @@ export interface UpdatePartRequest {
   name?: string;
   description?: string;
   imageUrl?: string;
-  branch?: Branch;
+  brand?: Brand;
   stock?: Stock;
 }

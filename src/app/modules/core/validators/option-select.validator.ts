@@ -13,9 +13,9 @@ export class RoleValidator {
 
 export class BrandValidator {
   static IsValidBrand(ac: AbstractControl): any {
-    const brand = ac.get('branch').value;
+    const brand = ac.get('brand').value;
     if (brand === 'Seleccione Marca') {
-      ac.get('branch').setErrors({ IsValidBrand: true });
+      ac.get('brand').setErrors({ IsValidBrand: true });
     } else {
       return null;
     }

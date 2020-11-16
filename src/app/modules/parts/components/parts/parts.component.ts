@@ -49,9 +49,9 @@ export class PartsComponent implements OnInit {
         this.getParts();
       },
       (err) => {
-        /*this.notificationUtilService.newErrorMessage(`
-         El Usuario no puede ser eliminado. </br>
-         Se encontraron repuestos asociados.`);*/
+        this.notificationUtilService.newErrorMessage(
+          `Estamos presentando fallas, por favor intente más tarde`
+        );
       }
     );
   }

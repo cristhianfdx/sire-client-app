@@ -17,7 +17,7 @@ import { FirebaseStorageService } from '@core/services/firebase-storage.service'
 import { CreatePartRequest } from '@core/models/request/create-part.request';
 import { UpdatePartRequest } from '@core/models/request/update-part.request';
 import { BrandValidator } from '@core/validators/option-select.validator';
-import { Branch } from '@core/models/request/branch';
+import { Brand } from '@core/models/request/brand';
 
 @Component({
   selector: 'app-modal-part',
@@ -26,7 +26,7 @@ import { Branch } from '@core/models/request/branch';
 })
 export class ModalPartComponent implements OnInit, OnDestroy {
   @Input() public part: UpdatePartRequest;
-  branch$: Observable<Branch[]>;
+  brand$: Observable<Brand[]>;
 
   faChevronDown = faChevronDown;
   faTimesCircle = faTimesCircle;
@@ -64,11 +64,11 @@ export class ModalPartComponent implements OnInit, OnDestroy {
       this.buildForm();
     }
 
-    this.getBranches();
+    this.getBrands();
   }
 
-  getBranches(): void {
-    this.branch$ = this.partService.getBranches();
+  getBrands(): void {
+    this.brand$ = this.partService.getBrands();
   }
 
   private buildForm(): void {
@@ -77,7 +77,7 @@ export class ModalPartComponent implements OnInit, OnDestroy {
         name: ['', [Validators.required]],
         imageUrl: [null, [Validators.required]],
         description: [''],
-        branch: ['Seleccione Marca', [Validators.required]],
+        brand: ['Seleccione Marca', [Validators.required]],
       },
       {
         validator: BrandValidator.IsValidBrand,
@@ -86,13 +86,13 @@ export class ModalPartComponent implements OnInit, OnDestroy {
   }
 
   private buildEditForm(): void {
-    const { name, description, branch } = this.part;
+    const { name, description, brand } = this.part;
 
     this.partForm = this.formBuilder.group({
       name: [name],
       imageUrl: [null],
       description: [description],
-      branch: [branch.id, [Validators.required]],
+      brand: [brand.id, [Validators.required]],
     });
   }
 
@@ -154,9 +154,9 @@ export class ModalPartComponent implements OnInit, OnDestroy {
   }
 
   createBrand(description: string): void {
-    const branch: Branch = { description };
-    this.partService.createBranch(branch).subscribe(() => {
-      this.getBranches();
+    const brand: Brand = { description };
+    this.partService.createBrands(brand).subscribe(() => {
+      this.getBrands();
     });
   }
 

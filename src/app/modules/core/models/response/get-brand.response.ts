@@ -1,4 +1,4 @@
-export interface GetBranchResponse {
+export interface GetBrandResponse {
   id: number;
   description: string;
 }
