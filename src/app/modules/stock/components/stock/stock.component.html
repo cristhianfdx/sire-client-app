@@ -1,1 +1,46 @@
-<p>stock works!</p>
+<div class="px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
+  <div class="hero">
+    <div
+      class="hero-headline flex flex-col items-center justify-center pt-24 text-center"
+    >
+      <h2 class="font-bold text-3xl text-gray-900">Stock de repuestos</h2>
+    </div>
+
+    <!-- image search box -->
+    <div class="box pt-6">
+      <div class="box-wrapper">
+        <div
+          class="bg-white rounded flex items-center w-full p-3 shadow-sm border border-gray-200"
+        >
+          <button class="outline-none focus:outline-none">
+            <fa-icon
+              [icon]="faSearch"
+              class="w-5 text-gray-600 h-5 cursor-pointer"
+            ></fa-icon>
+          </button>
+          <input
+            class="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent"
+            placeholder="Buscar repuestos"
+            type="search"
+            name=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <section
+      class="my-5 grid grid-cols-1 md:grid-cols-4 gap-4"
+      *ngIf="parts$ | async as parts"
+    >
+      <ng-template *ngFor="let part of parts">
+        <a href="#" class="hover:opacity-75">
+          <img
+            class="w-full h-64 object-cover"
+            [src]="part.imageUrl"
+            [alt]="part.name"
+          />
+        </a>
+      </ng-template>
+    </section>
+  </div>
+</div>
