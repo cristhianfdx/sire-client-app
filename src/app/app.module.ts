@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
+import { QuicklinkModule } from 'ngx-quicklink';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -30,6 +31,7 @@ import { environment } from '../environments/environment';
     FontAwesomeModule,
     AppRoutingModule,
     HttpClientModule,
+    QuicklinkModule,
     BrowserModule,
     SharedModule,
     FormsModule,

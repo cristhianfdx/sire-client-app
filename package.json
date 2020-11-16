@@ -31,6 +31,7 @@
     "file-saver": "^2.0.2",
     "firebase": "^8.0.2",
     "ngx-build-plus": "^10.1.1",
+    "ngx-quicklink": "^0.2.6",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.10.0",
     "tslib": "^2.0.0",
