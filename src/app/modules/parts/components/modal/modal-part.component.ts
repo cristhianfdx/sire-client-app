@@ -9,6 +9,7 @@ import {
   faTimesCircle,
   faChevronDown,
   faFileUpload,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
@@ -30,6 +31,7 @@ export class ModalPartComponent implements OnInit, OnDestroy {
   faChevronDown = faChevronDown;
   faTimesCircle = faTimesCircle;
   faFileUpload = faFileUpload;
+  faPlus = faPlus;
 
   fileRef: AngularFireStorageReference;
   partForm: FormGroup;
@@ -62,18 +64,25 @@ export class ModalPartComponent implements OnInit, OnDestroy {
       this.buildForm();
     }
 
+    this.getBranches();
+  }
+
+  getBranches(): void {
     this.branch$ = this.partService.getBranches();
   }
 
   private buildForm(): void {
-    this.partForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      imageUrl: [null, [Validators.required]],
-      description: [''],
-      branch: ['Seleccione Marca', [Validators.required]],
-    }, {
-      validator: BrandValidator.IsValidBrand
-    });
+    this.partForm = this.formBuilder.group(
+      {
+        name: ['', [Validators.required]],
+        imageUrl: [null, [Validators.required]],
+        description: [''],
+        branch: ['Seleccione Marca', [Validators.required]],
+      },
+      {
+        validator: BrandValidator.IsValidBrand,
+      }
+    );
   }
 
   private buildEditForm(): void {
@@ -142,6 +151,13 @@ export class ModalPartComponent implements OnInit, OnDestroy {
       },
       ({ status }) => this.throwErrorMessages()
     );
+  }
+
+  createBrand(description: string): void {
+    const branch: Branch = { description };
+    this.partService.createBranch(branch).subscribe(() => {
+      this.getBranches();
+    });
   }
 
   throwErrorMessages(status?: number): void {

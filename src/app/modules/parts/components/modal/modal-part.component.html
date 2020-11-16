@@ -103,15 +103,28 @@
                 </fa-icon>
               </div>
             </div>
+            <div class="flex justify-center">
+              <button
+                class="mt-3 text-white px-4 w-auto h-8 bg-blue-600 rounded-full hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+                [swal]="{
+                  title: 'Crear marca',
+                  input: 'text',
+                  showCancelButton: true
+                }"
+                (confirm)="createBrand($event)"
+              >
+                <fa-icon
+                  [icon]="faPlus"
+                  class="w-4 h-4 inline-block mr-1"
+                ></fa-icon>
+                <span>Crear marca</span>
+              </button>
+            </div>
             <div
               *ngIf="checkErrors('branch')"
               class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
             >
-              <div
-                *ngIf="
-                  partForm.controls['branch'].errors.IsValidBrand
-                "
-              >
+              <div *ngIf="partForm.controls['branch'].errors.IsValidBrand">
                 La Marca es requerida
               </div>
             </div>
