@@ -47,17 +47,8 @@ export class StockComponent implements OnInit {
   }
 
   addToStock(part: Part): void {
-    const stock: Stock = {
-      partId: part.id,
-    };
-
-    if (!part.stock) {
-      this.stockService.create(stock).subscribe((response: Stock) => {
-        this.stockStatusService.addStock(response);
-      });
-    } else {
-      this.updateStock(part.stock.id, stock, true);
-    }
+    const stock: Stock = { partId: part.id };
+    this.updateStock(part.stock.id, stock, true);
   }
 
   removeStock(part: Part): void {

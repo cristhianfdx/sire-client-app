@@ -1,12 +1,11 @@
 import { faUserEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
-import { ModalUserComponent } from '../modal/modal-user.component';
 import { UserService } from '@core/services/user.service';
 import { User } from '@core/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -22,8 +21,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private notificationUtilService: NotificationUtilService,
     private userService: UserService,
-    private modalService: NgbModal,
-    public activeModal: NgbActiveModal
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,11 +32,15 @@ export class UsersComponent implements OnInit {
     this.users$ = this.userService.getAll();
   }
 
-  openCreateUserModal(user: User): void {
-    const modalRef = this.modalService.open(ModalUserComponent);
-    if (user) {
-      modalRef.componentInstance.user = user;
-    }
+  createUser(): void {
+    this.router.navigate(['/users/management']);
+  }
+
+  editUser(user: User): void {
+    this.router.navigate([
+      '/users/management',
+      { user: btoa(JSON.stringify(user)) },
+    ]);
   }
 
   deleteUser(id: number): void {
@@ -48,9 +50,14 @@ export class UsersComponent implements OnInit {
         this.getUsers();
       },
       (err) => {
-        this.notificationUtilService.newErrorMessage(`
+        if (err.status === 400) {
+          this.notificationUtilService.newErrorMessage(`
+         El Usuario que se encuentra en sesión no puede ser eliminado.`);
+        } else {
+          this.notificationUtilService.newErrorMessage(`
          El Usuario no puede ser eliminado. </br>
          Se encontraron repuestos asociados.`);
+        }
       }
     );
   }

@@ -11,7 +11,7 @@
           type="button"
           class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer"
           aria-label="Close"
-          (click)="activeModal.dismiss('Cross click')"
+          (click)="backToHomeSection()"
         >
           <span aria-hidden="true">
             <fa-icon [icon]="faTimesCircle"></fa-icon>
@@ -170,7 +170,7 @@
         <button
           class="bg-transparent hover:bg-gray-500 text-teal-700 font-semibold hover:text-white py-2 px-4 border border-teal-500 hover:border-transparent rounded"
           aria-label="Close"
-          (click)="activeModal.dismiss('Cross click')"
+          (click)="backToHomeSection()"
         >
           Cancelar
         </button>

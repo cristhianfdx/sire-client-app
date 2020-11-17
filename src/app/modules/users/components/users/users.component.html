@@ -8,7 +8,7 @@
     </div>
     <button
       class="bg-teal-500 hover:bg-teal-600 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center mt-4 mb-4"
-      (click)="openCreateUserModal()"
+      (click)="createUser()"
     >
       <span class="mr-3">Crear usuario</span>
       <fa-icon [icon]="faPlus"></fa-icon>
@@ -74,7 +74,7 @@
               <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <button
                   class="bg-blue-400 hover:bg-blue-600 text-gray-100 font-bold py-2 px-3 rounded inline-flex items-center mr-2"
-                  (click)="openCreateUserModal(user)"
+                  (click)="editUser(user)"
                 >
                   <fa-icon [icon]="faUserEdit"></fa-icon>
                 </button>

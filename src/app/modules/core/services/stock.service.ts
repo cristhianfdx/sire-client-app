@@ -15,10 +15,6 @@ export class StockService {
 
   constructor(private http: HttpClient) {}
 
-  create(request: Stock): Observable<Stock> {
-    return this.http.post<Stock>(baseUrl + this.pathUrl, request);
-  }
-
   update(id: number, request: Stock): Observable<Stock> {
     return this.http.patch<Stock>(`${baseUrl + this.pathUrl}/${id}`, request);
   }

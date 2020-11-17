@@ -1,11 +1,11 @@
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import {
   faTimesCircle,
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
@@ -21,7 +21,7 @@ import { User } from '@core/models/user';
   styleUrls: ['./modal-user.component.scss'],
 })
 export class ModalUserComponent implements OnInit, OnDestroy {
-  @Input() public user: User;
+  user: User;
   roles$: Observable<Role[]>;
   modalForm: FormGroup;
   action: string;
@@ -30,10 +30,16 @@ export class ModalUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private notificationUtilService: NotificationUtilService,
+    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    public activeModal: NgbActiveModal,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private router: Router
+  ) {
+    const params: any = this.activatedRoute.snapshot.params;
+    if (Object.keys(params).length > 0) {
+      this.user = JSON.parse(atob(params.user));
+    }
+  }
 
   ngOnDestroy(): void {
     this.user = null;
@@ -94,7 +100,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
         const request: User = this.modalForm.value;
         this.userService.create(request).subscribe(
           () => {
-            this.activeModal.dismiss('Cross click');
+            this.backToHomeSection();
             this.notificationUtilService.newOkMessage('Usuario creado.');
           },
           ({ status }) => this.throwErrorMessages(status)
@@ -112,11 +118,15 @@ export class ModalUserComponent implements OnInit, OnDestroy {
 
     this.userService.update(this.user.id, request).subscribe(
       () => {
-        this.activeModal.dismiss('Cross click');
+        this.backToHomeSection();
         this.notificationUtilService.newOkMessage('Usuario actualizado.');
       },
       ({ status }) => this.throwErrorMessages(status)
     );
+  }
+
+  backToHomeSection(): void {
+    this.router.navigate(['/users']);
   }
 
   throwErrorMessages(status: number): void {

@@ -1,7 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorageReference } from '@angular/fire/storage';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PartService } from '@core/services/part.service';
 import { Observable } from 'rxjs';
 
@@ -17,6 +16,7 @@ import { FirebaseStorageService } from '@core/services/firebase-storage.service'
 import { BrandValidator } from '@core/validators/option-select.validator';
 import { Brand } from '@core/models/brand';
 import { Part } from '@core/models/part';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-part',
@@ -24,7 +24,7 @@ import { Part } from '@core/models/part';
   styleUrls: ['./modal-part.component.scss'],
 })
 export class ModalPartComponent implements OnInit, OnDestroy {
-  @Input() public part: Part;
+  part: Part;
   brand$: Observable<Brand[]>;
 
   faChevronDown = faChevronDown;
@@ -46,10 +46,16 @@ export class ModalPartComponent implements OnInit, OnDestroy {
   constructor(
     private notificationUtilService: NotificationUtilService,
     private firebaseStorage: FirebaseStorageService,
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
     private partService: PartService,
-    public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
-  ) {}
+    private router: Router
+  ) {
+    const params: any = this.activatedRoute.snapshot.params;
+    if (Object.keys(params).length > 0) {
+      this.part = JSON.parse(atob(params.part));
+    }
+  }
 
   ngOnDestroy(): void {
     this.part = null;
@@ -133,7 +139,7 @@ export class ModalPartComponent implements OnInit, OnDestroy {
     request.imageUrl = imageURL;
     this.partService.create(request).subscribe(
       () => {
-        this.activeModal.dismiss('Cross click');
+        this.backToHomeSection();
         this.notificationUtilService.newOkMessage('Repuesto creado.');
       },
       ({ status }) => this.throwErrorMessages(status)
@@ -145,7 +151,7 @@ export class ModalPartComponent implements OnInit, OnDestroy {
     delete request.imageUrl;
     this.partService.update(this.part.id, request).subscribe(
       () => {
-        this.activeModal.dismiss('Cross click');
+        this.backToHomeSection();
         this.notificationUtilService.newOkMessage('Repuesto actualizado.');
       },
       ({ status }) => this.throwErrorMessages()
@@ -157,6 +163,10 @@ export class ModalPartComponent implements OnInit, OnDestroy {
     this.partService.createBrands(brand).subscribe(() => {
       this.getBrands();
     });
+  }
+
+  backToHomeSection(): void {
+    this.router.navigate(['/parts']);
   }
 
   throwErrorMessages(status?: number): void {

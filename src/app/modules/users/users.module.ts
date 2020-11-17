@@ -1,4 +1,3 @@
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -19,6 +18,6 @@ import { UsersRoutingModule } from './users-routing.module';
     CommonModule,
     FormsModule,
   ],
-  providers: [NgbActiveModal, NgbModal],
+  providers: [],
 })
 export class UsersModule {}

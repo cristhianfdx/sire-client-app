@@ -1,12 +1,11 @@
 import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
-import { ModalPartComponent } from '../modal/modal-part.component';
 import { PartService } from '@core/services/part.service';
 import { Part } from '@core/models/part';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-parts',
@@ -21,9 +20,8 @@ export class PartsComponent implements OnInit {
 
   constructor(
     private notificationUtilService: NotificationUtilService,
-    public activeModal: NgbActiveModal,
     private partService: PartService,
-    private modalService: NgbModal
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,11 +32,15 @@ export class PartsComponent implements OnInit {
     this.parts$ = this.partService.getAll();
   }
 
-  openCreatePartModal(part: Part): void {
-    const modalRef = this.modalService.open(ModalPartComponent);
-    if (part) {
-      modalRef.componentInstance.part = part;
-    }
+  createPart(): void {
+    this.router.navigate(['/parts/management']);
+  }
+
+  editPart(part: Part): void {
+    this.router.navigate([
+      '/parts/management',
+      { part: btoa(JSON.stringify(part)) },
+    ]);
   }
 
   deletePart(id: number): void {
@@ -48,9 +50,15 @@ export class PartsComponent implements OnInit {
         this.getParts();
       },
       (err) => {
-        this.notificationUtilService.newErrorMessage(
-          `Estamos presentando fallas, por favor intente más tarde`
-        );
+        if (err.status === 400) {
+          this.notificationUtilService.newErrorMessage(
+            `No se puede eliminar el repuesto, porque tiene existencias en stock.`
+          );
+        } else {
+          this.notificationUtilService.newErrorMessage(
+            `Estamos presentando fallas, por favor intente más tarde.`
+          );
+        }
       }
     );
   }
