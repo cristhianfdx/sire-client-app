@@ -1,4 +1,4 @@
-export interface LoginRequest {
+export interface Login {
   documentNumber: string;
   password: string;
 }

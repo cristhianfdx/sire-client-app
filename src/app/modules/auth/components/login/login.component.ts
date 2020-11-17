@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
-import { TokenResponse } from '@core/models/response/token.response';
-import { LoginRequest } from '@core/models/request/login.request';
 import { AuthService } from '@core/services/auth.service';
 import { TokenService } from '@core/services/token.service';
+import { TokenResponse } from '@core/models/token.response';
+import { Login } from '@core/models/login';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(): void {
     if (!this.form.invalid) {
-      const request: LoginRequest = this.form.value;
+      const request: Login = this.form.value;
       this.subscription = this.authService.login(request).subscribe(
         ({ token }: TokenResponse) => {
           this.tokenService.saveToken(token);

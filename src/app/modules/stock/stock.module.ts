@@ -6,14 +6,17 @@ import { NgModule } from '@angular/core';
 
 import { StockComponent } from './components/stock/stock.component';
 import { StockRoutingModule } from './stock-routing.module';
+import { StockAddComponent } from './components/stock-add/stock-add.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [StockComponent],
+  declarations: [StockComponent, StockAddComponent],
   imports: [
     SweetAlert2Module.forRoot(),
     ReactiveFormsModule,
     StockRoutingModule,
     FontAwesomeModule,
+    SharedModule,
     CommonModule,
     FormsModule,
   ],

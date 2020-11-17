@@ -1,7 +1,7 @@
 import { Brand } from './brand';
 import { Stock } from './stock';
 
-export interface UpdatePartRequest {
+export interface Part {
   id?: number;
   name?: string;
   description?: string;

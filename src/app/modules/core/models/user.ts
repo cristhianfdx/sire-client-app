@@ -1,6 +1,6 @@
-import { Role } from '../response/role';
+import { Role } from './role';
 
-export interface UpdateUserRequest {
+export interface User {
   id?: number;
   name?: string;
   lastName?: string;

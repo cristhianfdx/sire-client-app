@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { TokenService } from '@core/services/token.service';
 import { environment } from 'src/environments/environment';
-import { LoginRequest } from '../models/request/login.request';
-import { TokenResponse } from '../models/response/token.response';
+import { TokenResponse } from '../models/token.response';
+import { Login } from '../models/login';
 
 const baseUrl = environment.apiUrl;
 
@@ -15,7 +15,7 @@ const baseUrl = environment.apiUrl;
 export class AuthService {
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
-  login(request: LoginRequest): Observable<TokenResponse> {
+  login(request: Login): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(`${baseUrl}/auth/login`, request);
   }
 

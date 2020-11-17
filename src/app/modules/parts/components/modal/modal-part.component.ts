@@ -14,10 +14,9 @@ import {
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
 import { FirebaseStorageService } from '@core/services/firebase-storage.service';
-import { CreatePartRequest } from '@core/models/request/create-part.request';
-import { UpdatePartRequest } from '@core/models/request/update-part.request';
 import { BrandValidator } from '@core/validators/option-select.validator';
-import { Brand } from '@core/models/request/brand';
+import { Brand } from '@core/models/brand';
+import { Part } from '@core/models/part';
 
 @Component({
   selector: 'app-modal-part',
@@ -25,7 +24,7 @@ import { Brand } from '@core/models/request/brand';
   styleUrls: ['./modal-part.component.scss'],
 })
 export class ModalPartComponent implements OnInit, OnDestroy {
-  @Input() public part: UpdatePartRequest;
+  @Input() public part: Part;
   brand$: Observable<Brand[]>;
 
   faChevronDown = faChevronDown;
@@ -130,7 +129,7 @@ export class ModalPartComponent implements OnInit, OnDestroy {
   }
 
   save(imageURL: string): void {
-    const request: CreatePartRequest = this.partForm.value;
+    const request: Part = this.partForm.value;
     request.imageUrl = imageURL;
     this.partService.create(request).subscribe(
       () => {
@@ -142,7 +141,7 @@ export class ModalPartComponent implements OnInit, OnDestroy {
   }
 
   update(): void {
-    const request: UpdatePartRequest = this.partForm.value;
+    const request: Part = this.partForm.value;
     delete request.imageUrl;
     this.partService.update(this.part.id, request).subscribe(
       () => {

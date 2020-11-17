@@ -9,12 +9,11 @@ import {
 import { Observable } from 'rxjs';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
-import { UpdateUserRequest } from '@core/models/request/update-user.request';
-import { CreateUserRequest } from '@core/models/request/create-user.request';
 import { RoleValidator } from '@core/validators/option-select.validator';
 import { PasswordValidator } from '@core/validators/password.validator';
 import { UserService } from '@core/services/user.service';
-import { Role } from '@core/models/response/role';
+import { Role } from '@core/models/role';
+import { User } from '@core/models/user';
 
 @Component({
   selector: 'app-modal-user',
@@ -22,7 +21,7 @@ import { Role } from '@core/models/response/role';
   styleUrls: ['./modal-user.component.scss'],
 })
 export class ModalUserComponent implements OnInit, OnDestroy {
-  @Input() public user: UpdateUserRequest;
+  @Input() public user: User;
   roles$: Observable<Role[]>;
   modalForm: FormGroup;
   action: string;
@@ -92,7 +91,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
       if (this.user) {
         this.update();
       } else {
-        const request: CreateUserRequest = this.modalForm.value;
+        const request: User = this.modalForm.value;
         this.userService.create(request).subscribe(
           () => {
             this.activeModal.dismiss('Cross click');
@@ -105,7 +104,7 @@ export class ModalUserComponent implements OnInit, OnDestroy {
   }
 
   update(): void {
-    const request: UpdateUserRequest = this.modalForm.value;
+    const request: User = this.modalForm.value;
 
     if (request.password === '') {
       delete request.password;

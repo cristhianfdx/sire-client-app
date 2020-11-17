@@ -1,46 +1,49 @@
-<div class="px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
-  <div class="hero">
-    <div
-      class="hero-headline flex flex-col items-center justify-center pt-24 text-center"
-    >
-      <h2 class="font-bold text-3xl text-gray-900">Stock de repuestos</h2>
+<header class="mt-4">
+  <div class="container mx-auto px-6 py-3">
+    <div class="flex items-center justify-between">
+      <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
+        Stock de Repuestos
+      </div>
     </div>
+  </div>
+</header>
 
-    <!-- image search box -->
-    <div class="box pt-6">
-      <div class="box-wrapper">
+<div class="my-8" *ngIf="parts$ | async as parts">
+  <div class="container mx-auto px-6">
+    <span class="mt-3 text-sm text-gray-500">
+      {{ parts.length }} Repuesto{{ parts.length > 1 ? "s" : "" }}
+    </span>
+    <div
+      class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6"
+    >
+      <div
+        class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden"
+        *ngFor="let part of parts"
+      >
         <div
-          class="bg-white rounded flex items-center w-full p-3 shadow-sm border border-gray-200"
+          class="flex items-end justify-end h-56 w-full bg-cover"
+          [style]="getCardBackgroundImage(part.imageUrl)"
         >
-          <button class="outline-none focus:outline-none">
-            <fa-icon
-              [icon]="faSearch"
-              class="w-5 text-gray-600 h-5 cursor-pointer"
-            ></fa-icon>
+          <button
+            class="p-0 w-10 h-10 bg-blue-400 rounded-full hover:bg-blue-600 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none text-white mr-2"
+            (click)="addToStock(part)"
+          >
+            <fa-icon class="w-6 h-6 inline-block" [icon]="faPlus"></fa-icon>
           </button>
-          <input
-            class="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent"
-            placeholder="Buscar repuestos"
-            type="search"
-            name=""
-          />
+          <button
+            class="p-0 w-10 h-10 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none text-white mr-1"
+            (click)="removeStock(part)"
+          >
+            <fa-icon class="w-6 h-6 inline-block" [icon]="faMinus"></fa-icon>
+          </button>
+        </div>
+        <div class="px-5 py-3">
+          <h3 class="text-gray-700 uppercase">{{ part.name }}</h3>
+          <span class="text-gray-500 mt-2" *ngIf="stock$ | async as stocks">
+            {{ stocks | stockQuantity:part.stock }} Existencias
+          </span>
         </div>
       </div>
     </div>
-
-    <section
-      class="my-5 grid grid-cols-1 md:grid-cols-4 gap-4"
-      *ngIf="parts$ | async as parts"
-    >
-      <ng-template *ngFor="let part of parts">
-        <a href="#" class="hover:opacity-75">
-          <img
-            class="w-full h-64 object-cover"
-            [src]="part.imageUrl"
-            [alt]="part.name"
-          />
-        </a>
-      </ng-template>
-    </section>
   </div>
 </div>

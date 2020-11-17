@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { CreatePartRequest } from '@core/models/request/create-part.request';
-import { GetPartResponse } from '@core/models/response/get-part.response';
 import { environment } from 'src/environments/environment';
+import { Brand } from '@core/models/brand';
+import { Part } from '@core/models/part';
 import { Observable } from 'rxjs';
-import { UpdatePartRequest } from '@core/models/request/update-part.request';
-import { Brand } from '@core/models/request/brand';
 
 const baseUrl = environment.apiUrl;
 
@@ -19,15 +17,15 @@ export class PartService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<GetPartResponse[]> {
-    return this.http.get<GetPartResponse[]>(baseUrl + this.pathUrl);
+  getAll(): Observable<Part[]> {
+    return this.http.get<Part[]>(baseUrl + this.pathUrl);
   }
 
-  create(request: CreatePartRequest): Observable<void> {
+  create(request: Part): Observable<void> {
     return this.http.post<void>(baseUrl + this.pathUrl, request);
   }
 
-  update(id: number, request: UpdatePartRequest): Observable<void> {
+  update(id: number, request: Part): Observable<void> {
     return this.http.patch<void>(`${baseUrl + this.pathUrl}/${id}`, request);
   }
 

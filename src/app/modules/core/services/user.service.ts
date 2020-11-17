@@ -3,10 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Role } from '@core/models/response/role';
-import { GetUserResponse } from '@core/models/response/get-user.response';
-import { CreateUserRequest } from '@core/models/request/create-user.request';
-import { UpdateUserRequest } from '@core/models/request/update-user.request';
+import { Role } from '@core/models/role';
+import { User } from '@core/models/user';
 
 const baseUrl = environment.apiUrl;
 
@@ -18,15 +16,15 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<GetUserResponse[]> {
-    return this.http.get<GetUserResponse[]>(baseUrl + this.pathUrl);
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(baseUrl + this.pathUrl);
   }
 
-  create(request: CreateUserRequest): Observable<void> {
+  create(request: User): Observable<void> {
     return this.http.post<void>(baseUrl + this.pathUrl, request);
   }
 
-  update(id: number, request: UpdateUserRequest): Observable<void> {
+  update(id: number, request: User): Observable<void> {
     return this.http.patch<void>(`${baseUrl + this.pathUrl}/${id}`, request);
   }
 

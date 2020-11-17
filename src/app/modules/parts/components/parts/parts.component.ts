@@ -1,13 +1,12 @@
 import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
-import { UpdatePartRequest } from '@core/models/request/update-part.request';
-import { GetPartResponse } from '@core/models/response/get-part.response';
 import { ModalPartComponent } from '../modal/modal-part.component';
 import { PartService } from '@core/services/part.service';
+import { Part } from '@core/models/part';
 
 @Component({
   selector: 'app-parts',
@@ -15,7 +14,7 @@ import { PartService } from '@core/services/part.service';
   styleUrls: ['./parts.component.scss'],
 })
 export class PartsComponent implements OnInit {
-  parts$: Observable<GetPartResponse[]>;
+  parts$: Observable<Part[]>;
   faEdit = faEdit;
   faTrash = faTrash;
   faPlus = faPlus;
@@ -35,7 +34,7 @@ export class PartsComponent implements OnInit {
     this.parts$ = this.partService.getAll();
   }
 
-  openCreatePartModal(part: UpdatePartRequest): void {
+  openCreatePartModal(part: Part): void {
     const modalRef = this.modalService.open(ModalPartComponent);
     if (part) {
       modalRef.componentInstance.part = part;

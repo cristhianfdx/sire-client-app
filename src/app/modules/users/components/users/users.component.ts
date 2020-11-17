@@ -1,13 +1,12 @@
+import { faUserEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NotificationUtilService } from '@core/services/utils/notification-util.service';
-import { faUserEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ModalUserComponent } from '../modal/modal-user.component';
 import { UserService } from '@core/services/user.service';
-import { GetUserResponse } from '@core/models/response/get-user.response';
-import { UpdateUserRequest } from '@core/models/request/update-user.request';
+import { User } from '@core/models/user';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +14,7 @@ import { UpdateUserRequest } from '@core/models/request/update-user.request';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  users$: Observable<GetUserResponse[]>;
+  users$: Observable<User[]>;
   faUserEdit = faUserEdit;
   faTrash = faTrash;
   faPlus = faPlus;
@@ -35,7 +34,7 @@ export class UsersComponent implements OnInit {
     this.users$ = this.userService.getAll();
   }
 
-  openCreateUserModal(user: UpdateUserRequest): void {
+  openCreateUserModal(user: User): void {
     const modalRef = this.modalService.open(ModalUserComponent);
     if (user) {
       modalRef.componentInstance.user = user;
