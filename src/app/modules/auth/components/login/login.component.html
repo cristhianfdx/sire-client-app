@@ -1,0 +1,80 @@
+<div
+  id="login-container"
+  class="flex container mx-auto items-center justify-center"
+>
+  <div class="w-full max-w-md">
+    <form
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      [formGroup]="form"
+      (ngSubmit)="login()"
+    >
+      <div class="logo">
+        <div class="flex items-center flex-shrink-0 text-teal-600 mr-6 mx-auto justify-center">
+          <svg
+            class="fill-current h-8 w-8 mr-2"
+            width="54"
+            height="54"
+            viewBox="0 0 54 54"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"
+            />
+          </svg>
+          <span class="font-semibold text-xl tracking-tight">SIRE</span>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="label" for="username"> N&uacute;mero de documento </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          placeholder="Número de documento"
+          formControlName="documentNumber"
+        />
+        <div
+          *ngIf="checkErrors('documentNumber')"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
+        >
+          <div *ngIf="form.controls['documentNumber'].errors.required">
+            El número de documento es requerido
+          </div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label class="label" for="password"> Contraseña </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="password"
+          placeholder="Contraseña"
+          formControlName="password"
+        />
+        <div
+          *ngIf="checkErrors('password')"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative"
+        >
+          <div *ngIf="form.controls['password'].errors.required">
+            La contraseña es requerida
+          </div>
+        </div>
+      </div>
+      <div class="grid">
+        <button
+          [class]="
+            !form.invalid
+              ? 'mt-3 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              : 'mt-3 bg-teal-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed'
+          "
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          Iniciar sesi&oacute;n
+        </button>
+      </div>
+    </form>
+    <p class="text-center text-gray-700 text-xs">
+      ©2020 SIRE APP by 🧨 Team. <br />
+      Todos los derechos reservados.
+    </p>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<section
+  class="relative bg-gray-100 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-20 text-center"
+>
+  <div>
+    <h2 class="text-3xl leading-tight font-bold">
+      Administraci&oacute;n de Inventario
+    </h2>
+  </div>
+
+  <div class="flex flex-col md:flex-row items-start justify-between mt-12">
+    <div
+      class="w-full bg-white shadow-lg rounded-lg px-4 py-6 lg:p-8 md:mx-2 lg:mx-4 transform hover:scale-110 cursor-pointer"
+      (click)="navigateTo(['/users'])"
+    >
+      <img src="./assets/images/user_group.svg" alt="" class="mx-auto h-32" />
+      <h4 class="text-xl font-bold leading-tight mt-8">
+        Gesti&oacute;n de usuarios
+      </h4>
+    </div>
+
+    <div
+      class="w-full bg-white shadow-lg rounded-lg px-4 py-6 lg:p-8 md:mx-2 lg:mx-4 mt-4 md:mt-0 transform hover:scale-110 cursor-pointer"
+      (click)="navigateTo(['/parts'])"
+    >
+      <img
+        src="./assets/images/data_maintenance.svg"
+        alt=""
+        class="mx-auto h-32"
+      />
+      <h4 class="text-xl font-bold leading-tight mt-8">
+        Gesti&oacute;n de repuestos
+      </h4>
+    </div>
+
+    <div
+      class="w-full bg-white shadow-lg rounded-lg px-4 py-6 lg:p-8 md:mx-2 lg:mx-4 mt-4 md:mt-0 transform hover:scale-110 cursor-pointer"
+      (click)="navigateTo(['/stock'])"
+    >
+      <img src="./assets/images/logistics.svg" alt="" class="mx-auto h-32" />
+      <h4 class="text-xl font-bold leading-tight mt-8">Stock de repuestos</h4>
+    </div>
+  </div>
+</section>

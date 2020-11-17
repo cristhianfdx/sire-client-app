@@ -1,0 +1,20 @@
+#login-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: relative;
+
+  .logo {
+    max-height: 60px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  .label {
+    @apply block;
+    @apply text-gray-700;
+    @apply text-sm;
+    @apply font-bold;
+    @apply mb-2;
+  }
+
+}
