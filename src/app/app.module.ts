@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -18,6 +19,7 @@ import { CoreModule } from '@core/core.module';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent],
@@ -35,8 +37,14 @@ import { environment } from '../environments/environment';
     SharedModule,
     FormsModule,
     CoreModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token'),
+      },
+    }),
   ],
   providers: [
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

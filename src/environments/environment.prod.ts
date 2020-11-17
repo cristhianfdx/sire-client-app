@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'https://sire-api.herokuapp.com/api',
   firebase: {
     apiKey: 'AIzaSyD2QWuIl2txOIrL6yifrWWErIM18tD1NL8',
     authDomain: 'sire-e9f51.firebaseapp.com',

@@ -3,11 +3,13 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 import { NgModule } from '@angular/core';
 
 import { LayoutComponent } from './modules/layout/layout.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -41,6 +43,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
