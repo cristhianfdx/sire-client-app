@@ -18,4 +18,12 @@ export class StockStatusService {
     this.stocks = [...this.stocks, stock];
     this.stock.next(this.stocks);
   }
+
+  updateStock(stock: Stock): void {
+    const stocks: Stock[] = this.stock.getValue();
+    const found: Stock = stocks.find((el) => el.id === stock.id);
+    const index: number = stocks.indexOf(found);
+    stocks.splice(index, 1);
+    this.addStock(stock);
+  }
 }

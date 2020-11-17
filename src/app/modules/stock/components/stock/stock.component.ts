@@ -72,7 +72,7 @@ export class StockComponent implements OnInit {
     this.stockService.getOne(stockId).subscribe(({ quantity }: Stock) => {
       stock.quantity = isAdd ? quantity + 1 : quantity - 1;
       this.stockService.update(stockId, stock).subscribe((response: Stock) => {
-        this.stockStatusService.addStock(response);
+        this.stockStatusService.updateStock(response);
       });
     });
   }
