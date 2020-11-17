@@ -7,7 +7,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { QuicklinkModule } from 'ngx-quicklink';
-import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
@@ -19,6 +19,7 @@ import { CoreModule } from '@core/core.module';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
+import { LoggedGuard } from './logged.guard';
 import { AuthGuard } from './auth.guard';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AuthGuard } from './auth.guard';
     }),
   ],
   providers: [
+    LoggedGuard,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { LayoutComponent } from './modules/layout/layout.component';
 import { AuthGuard } from './auth.guard';
+import { LoggedGuard } from './logged.guard';
 
 const routes: Routes = [
   {
@@ -40,10 +41,11 @@ const routes: Routes = [
   },
   {
     path: 'auth',
+    canActivate: [LoggedGuard],
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' }
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
