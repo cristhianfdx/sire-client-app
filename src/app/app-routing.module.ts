@@ -19,16 +19,19 @@ const routes: Routes = [
       },
       {
         path: 'home',
+        canLoad: [AuthGuard],
         loadChildren: () =>
           import('./modules/home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'users',
+        canLoad: [AuthGuard],
         loadChildren: () =>
           import('./modules/users/users.module').then((m) => m.UsersModule),
       },
       {
         path: 'parts',
+        canLoad: [AuthGuard],
         loadChildren: () =>
           import('./modules/parts/parts.module').then((m) => m.PartsModule),
       },
