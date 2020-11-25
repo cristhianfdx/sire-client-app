@@ -38,7 +38,7 @@ const menuData: Menu[] = [
     class: COMMON_CLASS,
     route: '/stock',
     name: 'Stock',
-    validateRole: false,
+    validateRole: true,
   },
 ];
 
