@@ -48,18 +48,21 @@ export class AuthGuard implements CanActivate, CanLoad {
     | boolean
     | UrlTree
     | Observable<boolean | UrlTree>
-    | Promise<boolean> | boolean {
-      const token = this.tokenService.getToken();
-      const roleName = this.getRole(token);
-      if ('Admin' === roleName) {
-        return true;
-      }
-      this.router.navigate(['/stock']);
-      return false;
+    | Promise<boolean>
+    | boolean {
+    const token = this.tokenService.getToken();
+    const roleName = this.getRole(token);
+    if ('Admin' === roleName) {
+      return true;
+    }
+    this.router.navigate(['/stock']);
+    return false;
   }
 
   private getRole(token: string): string {
     const tokenData = this.jwtHelper.decodeToken(token);
-    return tokenData.role.name;
+    if (tokenData) {
+      return tokenData.role.name;
+    }
   }
 }
